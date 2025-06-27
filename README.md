@@ -15,12 +15,15 @@ This is a simple description to setup the termed website.
    cd termed-server
 
 4. Install dependencies:
+   
    npm install
 
-5. Configure the server:
+6. Configure the server:
+   
    Edit config.js to set your settings
 
-6. Start the server:
+8. Start the server:
+   
    node index.js
 
 ✅ You're done! The server is now running.
