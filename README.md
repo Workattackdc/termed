@@ -11,8 +11,7 @@ This is a simple description to setup the termed website.
 1. Clone the repository:
    
    git clone https://github.com/workattackdc/termed.git
-   
-   cd termed
+
 
 4. Install dependencies:
    
