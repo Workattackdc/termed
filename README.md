@@ -12,7 +12,7 @@ This is a simple description to setup the termed website.
    
    git clone https://github.com/workattackdc/termed.git
    
-   cd termed-server
+   cd termed
 
 4. Install dependencies:
    
