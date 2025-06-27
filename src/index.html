@@ -1,0 +1,264 @@
+<!-- Dark Mode Discord Username Page -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Discord Username Status</title>
+  <style>
+    :root {
+      --main-bg: #181a20;
+      --card-bg: rgba(35, 39, 47, 0.85);
+      --accent: #5865f2;
+      --text: #f5f6fa;
+      --muted: #8a8fa3;
+      --danger: #ff4f4f;
+      --success: #43b581;
+      --shadow: 0 8px 32px 0 rgba(0,0,0,0.37);
+      --glass-blur: blur(16px);
+      --border-glow: 0 0 16px 2px #5865f2cc;
+    }
+    body {
+      background: linear-gradient(120deg, #23272f 0%, #181a20 100%);
+      min-height: 100vh;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+    /* Animated gradient orbs */
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(60px);
+      opacity: 0.5;
+      z-index: 0;
+      animation: float 8s ease-in-out infinite alternate;
+    }
+    .orb1 {
+      width: 340px; height: 340px;
+      background: #5865f2;
+      top: 10%; left: 5%;
+      animation-delay: 0s;
+    }
+    .orb2 {
+      width: 220px; height: 220px;
+      background: #43b581;
+      bottom: 10%; right: 10%;
+      animation-delay: 2s;
+    }
+    .orb3 {
+      width: 180px; height: 180px;
+      background: #ff4f4f;
+      top: 60%; left: 60%;
+      animation-delay: 4s;
+    }
+    @keyframes float {
+      0% { transform: translateY(0) scale(1); }
+      100% { transform: translateY(-30px) scale(1.08); }
+    }
+    .card {
+      background: var(--card-bg);
+      border-radius: 22px;
+      box-shadow: var(--shadow), var(--border-glow);
+      padding: 2.8rem 2.8rem 2.2rem 2.8rem;
+      min-width: 350px;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+      backdrop-filter: var(--glass-blur);
+      border: 2px solid rgba(88,101,242,0.18);
+      transition: box-shadow 0.3s, border 0.3s, background 0.3s;
+      overflow: hidden;
+    }
+    .card:hover {
+      box-shadow: 0 0 32px 8px #5865f2cc, var(--shadow);
+      border: 2px solid #5865f2;
+      background: rgba(35, 39, 47, 0.95);
+    }
+    .username {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--accent);
+      letter-spacing: 1.5px;
+      margin-bottom: 0.7rem;
+      text-shadow: 0 2px 12px #5865f2aa;
+      transition: opacity 0.3s;
+      display: inline-block;
+      white-space: pre;
+      border-right: 2.5px solid var(--accent);
+      overflow: hidden;
+      animation: blink-cursor 0.8s steps(1) infinite;
+      vertical-align: bottom;
+      line-height: 1.1;
+      min-height: unset;
+    }
+    @keyframes blink-cursor {
+      0%, 100% { border-color: var(--accent); }
+      50% { border-color: transparent; }
+    }
+    .terminated {
+      color: var(--danger);
+      font-size: 1.15rem;
+      margin-bottom: 1.2rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      animation: pulse 1.2s infinite alternate;
+      text-shadow: 0 2px 8px #ff4f4faa;
+    }
+    #notTerminated {
+      color: var(--success);
+      font-size: 1.15rem;
+      margin-bottom: 1.2rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      animation: pulse 1.2s infinite alternate;
+      text-shadow: 0 2px 8px #43b581aa;
+    }
+    @keyframes pulse {
+      from { opacity: 1; }
+      to { opacity: 0.7; }
+    }
+    .new-account {
+      color: var(--success);
+      font-size: 1.1rem;
+      margin-top: 1.2rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-shadow: 0 2px 8px #43b581aa;
+      background: rgba(67,181,129,0.08);
+      border-radius: 8px;
+      padding: 0.4em 0.8em;
+      display: inline-block;
+      margin-bottom: 0.2em;
+      border: 1px solid rgba(67,181,129,0.18);
+    }
+    .label {
+      color: var(--muted);
+      font-size: 1.05rem;
+      margin-bottom: 0.2rem;
+      letter-spacing: 0.3px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      margin-top: 0.5em;
+    }
+    /* Discord bar accent */
+    .discord-bar {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 6px;
+      background: linear-gradient(90deg, #5865f2 0%, #43b581 60%, #ff4f4f 100%);
+      border-radius: 22px 22px 0 0;
+      box-shadow: 0 2px 12px #5865f2aa;
+      z-index: 2;
+    }
+    /* Alarm effect overlay */
+    .alarm-overlay {
+      display: none;
+      position: fixed;
+      z-index: 10;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      pointer-events: none;
+      background: repeating-linear-gradient(
+        135deg,
+        #ff4f4f88 0 30px,
+        transparent 30px 60px
+      );
+      animation: alarmFlash 0.7s infinite alternate;
+      opacity: 0.7;
+    }
+    @keyframes alarmFlash {
+      from { filter: brightness(1.2) saturate(1.5); }
+      to { filter: brightness(0.7) saturate(2.5); }
+    }
+    /* Alarm circle with cross */
+    .alarm-symbol {
+      display: none;
+      position: fixed;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 100;
+      width: 700px;
+      height: 700px;
+      pointer-events: none;
+      opacity: 0.55;
+    }
+    .alarm-symbol svg {
+      width: 100%;
+      height: 100%;
+      filter: drop-shadow(0 0 32px #ff4f4faa);
+      opacity: 0.85;
+      animation: alarmPulse 1s infinite alternate;
+    }
+    @keyframes alarmPulse {
+      from { filter: drop-shadow(0 0 32px #ff4f4faa) brightness(1.1); }
+      to { filter: drop-shadow(0 0 64px #ff4f4faa) brightness(0.7); }
+    }
+  </style>
+</head>
+<body>
+    <div class="orb orb1" id="orb1"></div>
+    <div class="orb orb2" id="orb2"></div>
+    <div class="orb orb3" id="orb3"></div>
+    <div class="alarm-symbol" id="alarmSymbol">
+      <svg viewBox="0 0 100 100">
+        <circle cx="50" cy="50" r="44" stroke="#ff4f4f" stroke-width="8" fill="none" />
+        <line x1="25" y1="75" x2="75" y2="25" stroke="#ff4f4f" stroke-width="10" stroke-linecap="round" />
+      </svg>
+    </div>
+    <div class="card">
+      <div class="discord-bar"></div>
+      <div class="label">Discord Username</div>
+      <div class="username" id="username"></div>
+      <div class="terminated" id="terminated" style="display:none;">Account Terminated</div>
+      <div class="terminated" id="notTerminated" style="display:none; color: var(--success);">Account Not Terminated</div>
+      <div class="label" id="newLabel" style="display:none;">New Account</div>
+      <div class="new-account" id="newAccount" style="display:none;"></div>
+    </div>
+    <script src="config.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        // Typewriter effect for username (toggle)
+        const username = config.card.username || "Workattack_";
+        const usernameElem = document.getElementById('username');
+        if(config.card.typewriter) {
+          let i = 0;
+          function typeWriter() {
+            if (i <= username.length) {
+              usernameElem.textContent = username.slice(0, i);
+              i++;
+              setTimeout(typeWriter, 80);
+            }
+          }
+          typeWriter();
+        } else {
+          usernameElem.textContent = username;
+        }
+
+        if(config.termed.terminated) {
+          document.getElementById('terminated').style.display = '';
+          usernameElem.style.opacity = '0.5';
+          if(config.termed.newAccount && config.termed.newAccount.trim() !== "") {
+            document.getElementById('newLabel').style.display = '';
+            document.getElementById('newAccount').style.display = '';
+            document.getElementById('newAccount').textContent = config.termed.newAccount;
+          }
+          if(config.termed.alarmEffect) {
+            document.getElementById('alarmSymbol').style.display = 'block';
+            // Hide orbs
+            document.getElementById('orb1').style.display = 'none';
+            document.getElementById('orb2').style.display = 'none';
+            document.getElementById('orb3').style.display = 'none';
+          }
+        } else {
+          document.getElementById('notTerminated').style.display = '';
+          usernameElem.style.opacity = '1';
+        }
+      });
+    </script>
+  </body>
+</html>
