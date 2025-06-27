@@ -1,10 +1,9 @@
-<!-- Dark Mode Discord Username Page -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Discord Username Status</title>
+  <title>Discord Termination Status</title>
   <style>
     :root {
       --main-bg: #181a20;
@@ -28,7 +27,6 @@
       overflow: hidden;
       position: relative;
     }
-    /* Animated gradient orbs */
     .orb {
       position: absolute;
       border-radius: 50%;
@@ -145,7 +143,6 @@
       letter-spacing: 1.2px;
       margin-top: 0.5em;
     }
-    /* Discord bar accent */
     .discord-bar {
       position: absolute;
       top: 0; left: 0; right: 0;
@@ -155,7 +152,6 @@
       box-shadow: 0 2px 12px #5865f2aa;
       z-index: 2;
     }
-    /* Alarm effect overlay */
     .alarm-overlay {
       display: none;
       position: fixed;
@@ -174,7 +170,6 @@
       from { filter: brightness(1.2) saturate(1.5); }
       to { filter: brightness(0.7) saturate(2.5); }
     }
-    /* Alarm circle with cross */
     .alarm-symbol {
       display: none;
       position: fixed;
@@ -222,7 +217,6 @@
     <script src="config.js"></script>
     <script>
       document.addEventListener('DOMContentLoaded', function() {
-        // Typewriter effect for username (toggle)
         const username = config.card.username || "Workattack_";
         const usernameElem = document.getElementById('username');
         if(config.card.typewriter) {
@@ -249,7 +243,6 @@
           }
           if(config.termed.alarmEffect) {
             document.getElementById('alarmSymbol').style.display = 'block';
-            // Hide orbs
             document.getElementById('orb1').style.display = 'none';
             document.getElementById('orb2').style.display = 'none';
             document.getElementById('orb3').style.display = 'none';
