@@ -1,4 +1,4 @@
-# Termed Server
+# Termed Website
 
 This is a simple description to setup the termed website.
 
