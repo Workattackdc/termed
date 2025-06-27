@@ -22,7 +22,7 @@ This is a simple description to setup the termed website.
    Edit config.js to set your settings
 
 8. Start the server:
-   
-   node index.js
+
+   node server.js
 
 ✅ You're done! The server is now running.
