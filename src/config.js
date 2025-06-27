@@ -1,12 +1,12 @@
 const config = {
   card: {
-    username: "Workattack_",
+    username: "YOUR_USERNAME",
     typewriter: true
   },
   termed: {
     terminated: false,
     alarmEffect: true,
-    newAccount: "WorkattackNew_"
+    newAccount: "YOUR_NEW_USER"
   },
   server: {
     port: 3000
