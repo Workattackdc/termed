@@ -4,7 +4,7 @@ This is a simple description to setup the termed website.
 
 ## 📦 Requirements
 
-- Node.js (v16+ recommended): https://nodejs.org
+- Node.js: https://nodejs.org
 
 ## 🚀 Setup
 
