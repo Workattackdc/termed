@@ -1,9 +1,10 @@
 const express = require('express');
 const path = require('path');
 const config = require('./config');
+const os = require('os');
 
 const app = express();
-const PORT = (config.server && config.server.port) || 3000;
+const PORT = config.server.port;
 
 app.use(express.static(path.join(__dirname)));
 
@@ -12,5 +13,16 @@ app.get('/', (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+  const interfaces = os.networkInterfaces();
+  let address = 'localhost';
+  for (const name of Object.keys(interfaces)) {
+    for (const iface of interfaces[name]) {
+      if (iface.family === 'IPv4' && !iface.internal) {
+        address = iface.address;
+        break;
+      }
+    }
+    if (address !== 'localhost') break;
+  }
+  console.log(`Server running on http://${address}:${PORT}`);
 });
