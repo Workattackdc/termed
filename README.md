@@ -16,7 +16,7 @@ This is a simple description to setup the termed website.
    npm install
 
 3. Configure the server:
-   Edit config.js to set your settings (e.g., port, title, tokens).
+   Edit config.js to set your settings
 
 4. Start the server:
    node index.js
